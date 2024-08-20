@@ -15,11 +15,9 @@ jobs:
           GITLAB_TOKEN: 'glptt-8048d229e93509f47761d681d3548694f53a3bc4'
           GITLAB_PROJECT_ID: 60935746
         run: |
-          echo "curl --request POST --form token=${{ secrets.GITLAB_TOKEN }} --form ref=main --form variables[BUILD_TRIGGER]=true
-            https://gitlab.com/api/v4/projects/${{ secrets.GITLAB_PROJECT_ID }}/trigger/pipeline"
           curl --request POST \
             --form "token=$GITLAB_TOKEN" \
             --form "ref=main" \
             --form "variables[BUILD_TRIGGER]=true" \
-            --form "variables[PIPELINE_TYPE]=infra"
+            --form "variables[PIPELINE_TYPE]=infra" \
             "https://gitlab.com/api/v4/projects/$GITLAB_PROJECT_ID/trigger/pipeline"
