@@ -15,6 +15,8 @@ jobs:
           GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
           GITLAB_PROJECT_ID: ${{ secrets.GITLAB_PROJECT_ID }}
         run: |
+          echo "curl --request POST --form token=${{ secrets.GITLAB_TOKEN }} --form ref=main --form variables[BUILD_TRIGGER]=true
+            https://gitlab.com/api/v4/projects/${{ secrets.GITLAB_PROJECT_ID }}/trigger/pipeline"
           curl --request POST \
             --form "token=${{ secrets.GITLAB_TOKEN }}" \
             --form "ref=main" \
