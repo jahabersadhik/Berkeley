@@ -1,0 +1,22 @@
+name: Trigger GitLab Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger-gitlab-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger GitLab Pipeline
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          GITLAB_PROJECT_ID: ${{ secrets.GITLAB_PROJECT_ID }}
+        run: |
+          curl --request POST \
+            --form "token=${{ secrets.GITLAB_TOKEN }}" \
+            --form "ref=main" \
+            --form "variables[BUILD_TRIGGER]=true" \
+            "https://gitlab.com/api/v4/projects/${{ secrets.GITLAB_PROJECT_ID }}/trigger/pipeline"
