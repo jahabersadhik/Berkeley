@@ -1,0 +1,13 @@
+# Use a base image that supports both Docker and AWS CLI
+FROM docker:20.10.8
+
+# Install necessary dependencies and AWS CLI
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    bash \
+    && pip3 install awscli
+
+# Verify installations
+RUN docker --version && aws --version
+
