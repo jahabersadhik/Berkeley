@@ -13,7 +13,7 @@ const client = redis.createClient({
 client.set('visits', 0);
 
 // Define the route
-app.get('/', (req, res) => {
+app.get('/count', (req, res) => {
     client.get('visits', (err, visits) => {
         if (err) {
             res.status(500).send('Error retrieving visits');
